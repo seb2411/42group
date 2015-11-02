@@ -31,8 +31,8 @@ RUN mkdir /docker
 COPY scripts /docker
 
 # Include the app code in apache directory
-# COPY . /var/www/html/
-VOLUME ["/var/www/html/"]
+COPY . /var/www/html/
+#VOLUME ["/var/www/html/"]
 
 # Add apache conflicts
 ADD scripts/000-default.conf /etc/apache2/sites-available/
