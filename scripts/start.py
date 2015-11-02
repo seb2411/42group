@@ -15,6 +15,7 @@ if os.environ.get('SYMFONY_STATE'):
 # Check symfony app configuration
 if os.environ.get('SYMFONY_STATE') == 'dev':
     os.system("composer update")
+    os.system("composer install")
     os.system("php app/console cache:clear --env=dev")
     os.system("php app/console assetic:dump --env=dev")
 else:
