@@ -1,0 +1,46 @@
+<table class="table table-striped table-hover">
+    <tr>
+        <th>Id</th>
+        <td>{{message.id}}</td>
+    </tr>
+    <tr>
+        <th>Sent at</th>
+        <td>{{message.sentAt|date("F jS \\a\\t g:ia")}}</td>
+    </tr>
+    <tr>
+        <th>Type</th>
+        <td>
+            {% if message.type == 0 %}
+                <span class="text-primary">SMS</span>
+            {% elseif message.type == 1 %}
+                <span class="text-success">Whatsapp</span>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <th>Sender</th>
+        <td>{{message.sender}}</td>
+    </tr>
+    <tr>
+        <th>Number</th>
+        <td>{{message.numbers}}</td>
+    </tr>
+    <tr>
+        <th>Status</th>
+        <td>
+            {% if message.status == 1 %}
+                <span class="label label-default">Pending</span>
+            {% elseif message.status == 2 %}
+                <span class="label label-primary">Sent</span>
+            {% elseif message.status == 3 %}
+                <span class="label label-success">Delivered</span>
+            {% elseif message.status == 4 %}
+                <span class="label label-danger">Failed</span>
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <th>Message</th>
+        <td>{{message.message}}</td>
+    </tr>
+</table>

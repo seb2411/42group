@@ -1,0 +1,9 @@
+FortyTwoGroup\MessengeBundle\Document\Message:
+    properties:
+        sender:
+            - Length: { max: 10, groups: [sms] }
+            - Length: { max: 20, groups: [whatsapp] }
+            - Regex: { pattern: "/^[a-zA-Z0-9]+$/i", message: "Only alphanumerics", groups: [whatsapp, sms] }
+        message:
+            - Length: { max: 160, groups: [sms] }
+            - Length: { max: 256, groups: [whatsapp] }

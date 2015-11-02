@@ -1,0 +1,7 @@
+forty_two_group_message:
+    path:     /message/{id}
+    defaults: { _controller: FortyTwoGroupMessengeBundle:Default:message}
+
+forty_two_group_messenge_homepage:
+    path:     /
+    defaults: { _controller: FortyTwoGroupMessengeBundle:Default:index }

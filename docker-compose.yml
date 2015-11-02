@@ -1,0 +1,10 @@
+app:
+  build: .
+  volumes:
+    - .:/var/www/html/
+  links:
+    - mongodb
+  environment:
+    SYMFONY_STATE: dev
+mongodb:
+    image: mongo

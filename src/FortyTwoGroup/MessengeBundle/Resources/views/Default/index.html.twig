@@ -1,0 +1,191 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <title>42 Group - Messenger application</title>
+        <meta name="description" content="42 Group - Messenger application">
+        <meta name="author" content="Lemarinel Sébastien">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+        {% stylesheets '@FortyTwoGroupMessengeBundle/Resources/public/css/*' filter='cssrewrite' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+        <div class="container">
+            <br>
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">
+                            <img alt="Brand" src="//www.fortytwo.com/wp-content/themes/fortytwo/assets/img/fortytwo-dark.png" alt="FortyTwo">
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="container" >
+            <div class="row">
+                <div class="col-md-8">
+                     {{ include('@FortyTwoGroupMessengeBundle/Resources/views/Default/components/messagelist.html.twig') }}
+                </div>
+                <div class="col-md-4">
+                    {% if isValid %}
+                        <div class="row bg-primary text-center">
+                            <br>
+                            <h1><span class="glyphicon glyphicon-ok" aria-hidden="true"></h1>
+                            <p>Message sent successfuly !!</span></p>
+                            <br>
+                            <a href="/" class="btn btn-default">Send new messages</a>
+                            <br class="clearfix">
+                            <br>
+                        </div>
+                    {% else %}
+                    <h3><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Your message</h3>
+                    <div>
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist" >
+
+                            <li role="presentation"  class="active">
+                                <a href="#whatsapp" aria-controls="whatsapp" role="tab" data-toggle="tab">
+                                    Whatsapp
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#sms" aria-controls="sms" role="tab" data-toggle="tab">
+                                    SMS
+                                </a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <br>
+
+                            <div role="tabpanel" class="tab-pane" id="sms">
+                                <br>
+                                {{ form_start(formSms) }}
+
+                                    <div class="bg-danger text-danger">{{ form_errors(formSms) }}</div>
+                                    {{ form_widget(formSms.type) }}
+                                    <div class="form-group">
+                                        <label>
+                                            {{ form_label(formSms.exclusive) }} {{ form_widget(formSms.exclusive) }}
+                                            <div class="bg-danger text-danger">{{ form_errors(formSms.exclusive) }}</div>
+                                        </label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        {{ form_label(formSms.numbers) }}
+                                        {{ form_widget(formSms.numbers) }}
+                                        <div class="bg-danger text-danger">{{ form_errors(formSms.numbers) }}</div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        {{ form_label(formSms.attachment) }}
+                                        <div>{{ form_widget(formSms.attachment) }}</div>
+                                        <div class="bg-danger text-danger">{{ form_errors(formSms.attachment) }}</div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        {{ form_label(formSms.sender) }}
+                                        {{ form_widget(formSms.sender) }}
+                                        <div class="bg-danger text-danger">{{ form_errors(formSms.sender) }}</div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        {{ form_label(formSms.message) }}
+                                        {{ form_widget(formSms.message, {'attr': {'class': 'form-control', 'placeholder': '160 characters max.'}}) }}
+                                        <div class="bg-danger text-danger">{{ form_errors(formSms.message, {'attr': {'class': 'bg-danger'}}) }}</div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        {{ form_widget(formSms.send) }}
+                                        {{ form_widget(formSms.reset) }}
+                                    </div>
+                                {{ form_end(formSms) }}
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane active" id="whatsapp">
+                                <br>
+                                {{ form_start(formWhatsapp) }}
+
+                                    <div class="bg-danger text-danger">{{ form_errors(formWhatsapp) }}</div>
+                                    {{ form_widget(formWhatsapp.type) }}
+                                    <div class="form-group">
+                                        <label>
+                                            {{ form_label(formWhatsapp.exclusive) }} {{ form_widget(formWhatsapp.exclusive) }}
+                                            <div class="bg-danger text-danger">{{ form_errors(formWhatsapp.exclusive) }}</div>
+                                        </label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        {{ form_label(formWhatsapp.numbers) }}
+                                        {{ form_widget(formWhatsapp.numbers) }}
+                                        <div class="bg-danger text-danger">{{ form_errors(formWhatsapp.numbers) }}</div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        {{ form_label(formWhatsapp.attachment) }}
+                                        <div>{{ form_widget(formWhatsapp.attachment) }}</div>
+                                        <div class="bg-danger text-danger">{{ form_errors(formWhatsapp.attachment) }}</div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        {{ form_label(formWhatsapp.sender) }}
+                                        {{ form_widget(formWhatsapp.sender) }}
+                                        <div class="bg-danger text-danger">{{ form_errors(formWhatsapp.sender) }}</div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        {{ form_label(formWhatsapp.message) }}
+                                        {{ form_widget(formWhatsapp.message, {'attr': {'class': 'form-control', 'placeholder': '256 characters max.'}}) }}
+                                        <div class="bg-danger text-danger">{{ form_errors(formWhatsapp.message) }}</div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        {{ form_widget(formWhatsapp.send) }}
+                                        <div class="bg-danger text-danger">{{ form_widget(formWhatsapp.reset) }}</div>
+                                    </div>
+                                {{ form_end(formWhatsapp) }}
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+        {% javascripts '@FortyTwoGroupMessengeBundle/Resources/public/js/*' %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        <script>
+            $('#myTabs a').click(function (e) {
+                e.preventDefault()
+                $(this).tab('show')
+            });
+            $("[name='messageWhatsapp[exclusive]']").bootstrapSwitch();
+            $("[name='messageSms[exclusive]']").bootstrapSwitch();
+            $('.search input.datepicker').datepicker();
+            $('table.table').on('click', 'a.item',function (e) {
+                $.ajax({
+                    method: "GET",
+                    url: 'message/' + this.id
+                }).done(function( data ) {
+                    $('.modal-body').html(data);
+                    $('#myModal').modal('show');
+                });
+                return false;
+            });
+        </script>
+    </body>
+</html>

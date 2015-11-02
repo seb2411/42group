@@ -1,0 +1,3 @@
+forty_tow_group_messenge:
+    resource: "@FortyTwoGroupMessengeBundle/Resources/config/routing.yml"
+    prefix:   /
